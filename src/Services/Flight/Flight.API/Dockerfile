@@ -7,10 +7,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Flight.API/Flight.API.csproj", "Flight.API/"]
-RUN dotnet restore "Flight.API/Flight.API.csproj"
+
+COPY ["src/Services/Flight/Flight.API/Flight.API.csproj", "src/Services/Flight/Flight.API/"]
+RUN dotnet restore "src/Services/Flight/Flight.API/Flight.API.csproj"
 COPY . .
-WORKDIR "/src/Flight.API"
+
+WORKDIR "/src/src/Services/Flight/Flight.API"
 RUN dotnet build "Flight.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

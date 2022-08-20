@@ -8,17 +8,18 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
+COPY ["travel-services.sln". "travel-services.sln"]
 COPY ["src/Services/Flight/Flight.API/Flight.API.csproj", "src/Services/Flight/Flight.API/"]
-RUN dotnet restore "src/Services/Flight/Flight.API/Flight.API.csproj"
+COPY "docker-compose.dcproj" "docker-compose.dcproj"
+COPY "NuGet.config" "NuGet.config"
+RUN dotnet restore "travel-services.sln"
 COPY . .
 
-WORKDIR "/src/src/Services/Flight/Flight.API"
-RUN dotnet build "Flight.API.csproj" -c Release -o /app/build
-
+WORKDIR /src/Services/Flight/Flight.API
+RUN dotnet publish --no-restore -c Release -o /app
 FROM build AS publish
-RUN dotnet publish "Flight.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Flight.API.dll"]

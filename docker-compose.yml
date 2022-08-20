@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  flight.api:
+    image: ${DOCKER_REGISTRY-}flightapi
+    build:
+      context: .
+      dockerfile: src/Services/Flight/Flight.API/Dockerfile

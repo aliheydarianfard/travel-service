@@ -10,13 +10,17 @@ WORKDIR /src
 
 COPY ["travel-services.sln". "travel-services.sln"]
 COPY ["src/Services/Flight/Flight.API/Flight.API.csproj", "src/Services/Flight/Flight.API/"]
-COPY "docker-compose.dcproj" "docker-compose.dcproj"
-COPY "NuGet.config" "NuGet.config"
-RUN dotnet restore "travel-services.sln"
-COPY . .
 
+COPY "docker-compose.dcproj" "docker-compose.dcproj"
+
+COPY "NuGet.config" "NuGet.config"
+
+RUN dotnet restore "travel-services.sln"
+
+COPY . .
 WORKDIR /src/Services/Flight/Flight.API
 RUN dotnet publish --no-restore -c Release -o /app
+
 FROM build AS publish
 
 FROM base AS final

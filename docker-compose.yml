@@ -1,8 +1,13 @@
 version: '3.4'
 
 services:
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+
   flight-api:
     image: ${REGISTRY:-travel}/flight.api-${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: src
       dockerfile: Services/Flight/Flight.API/Dockerfile
+    depends_on:
+     - sqldata

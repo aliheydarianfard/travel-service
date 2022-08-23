@@ -10,10 +10,11 @@ WORKDIR /src
 
 COPY ["travel-services.sln". "travel-services.sln"]
 COPY ["src/Services/Flight/Flight.API/Flight.API.csproj", "src/Services/Flight/Flight.API/"]
+COPY ["BuildingBlocks/Logging/Common.Logging/Common.Logging.csproj", "BuildingBlocks/Logging/Common.Logging/"]
 
-COPY "docker-compose.dcproj" "docker-compose.dcproj"
+COPY ["docker-compose.dcproj","docker-compose.dcproj"]
 
-COPY "NuGet.config" "NuGet.config"
+COPY ["NuGet.config","NuGet.config"]
 
 RUN dotnet restore "travel-services.sln"
 

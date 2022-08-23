@@ -1,6 +1,26 @@
+
 var configuration = GetConfiguration();
-var host = CreateHostBuilder(configuration, args);
-host.Run(); 
+
+try
+{
+    var host = CreateHostBuilder(configuration, args);
+    Log.Information("Configuring web host ({ApplicationContext})...", Program.AppName);
+    Log.Information("Applying migrations ({ApplicationContext})...", Program.AppName);
+
+
+    Log.Information("Starting web host ({ApplicationContext})...", Program.AppName);
+    host.Run();
+
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
+
 IConfiguration GetConfiguration()
 {
     var path = Directory.GetCurrentDirectory();
@@ -20,17 +40,19 @@ Host.CreateDefaultBuilder(args)
    .ConfigureWebHostDefaults(webBuilder =>
    {
        webBuilder.UseStartup<Startup>()
-       //.ConfigureKestrel(options =>
-       //{
-       //    options.Listen(IPAddress.Any, 80, listenOptions =>
-       //    {
-       //        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-       //    });
-       //})
       .UseContentRoot(Directory.GetCurrentDirectory())
       .UseWebRoot("Pics")
       .ConfigureAppConfiguration(x => x.AddConfiguration(configuration))
       .CaptureStartupErrors(false);
    })
-
+   .UseSerilog(SeriLogger.Configure)
    .Build();
+
+
+
+public partial class Program
+{
+
+    public static string? Namespace = typeof(Startup).Namespace;
+    public static string? AppName = "Catalog.API";
+}

@@ -1,10 +1,26 @@
 version: '3.4'
 
 services:
+  sqldata:
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "5433:1433"
+    volumes:
+      - travel-sqldata:/var/opt/mssql
+
   flight-api:
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
     - PATH_BASE=${PATH_BASE}
+    - SeqServerUrl=${SeqServerUrlVar}
+    - LogstashgUrl=${LogstashUrlVar}
+
    ports:
     - "5101:80"
     - "9101:81"
+
+volumes:
+ travel-sqldata:
+  external: false

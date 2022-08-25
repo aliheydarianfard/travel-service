@@ -17,7 +17,13 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{131FC9DA-F788-445A-81BA-A5C1CC84702D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "..\Common.Logging\Common.Logging.csproj", "{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Logging", "..\Common.Logging\Common.Logging.csproj", "{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight.Domain", "Services\Flight\Flight.Domain\Flight.Domain.csproj", "{F61E642A-4516-44DD-9161-741976712774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight.Application", "Services\Flight\Flight.Application\Flight.Application.csproj", "{9A37B96B-0697-4B66-AA88-17E7122A4234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flight.Infrastructure", "Services\Flight\Flight.Infrastructure\Flight.Infrastructure.csproj", "{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +43,18 @@ Global
 		{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F61E642A-4516-44DD-9161-741976712774}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F61E642A-4516-44DD-9161-741976712774}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F61E642A-4516-44DD-9161-741976712774}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F61E642A-4516-44DD-9161-741976712774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A37B96B-0697-4B66-AA88-17E7122A4234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A37B96B-0697-4B66-AA88-17E7122A4234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A37B96B-0697-4B66-AA88-17E7122A4234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A37B96B-0697-4B66-AA88-17E7122A4234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +66,9 @@ Global
 		{08FFF938-FF1E-4CE4-B5F7-9296AC6C1E3C} = {4E7267B8-E7DE-449F-B7A8-DBFF08F9867F}
 		{131FC9DA-F788-445A-81BA-A5C1CC84702D} = {3498F21F-7F62-4A00-B59B-80F2DB350F12}
 		{187FE739-A93E-4EA8-8FDF-DA4A3A7DBCC1} = {131FC9DA-F788-445A-81BA-A5C1CC84702D}
+		{F61E642A-4516-44DD-9161-741976712774} = {4E7267B8-E7DE-449F-B7A8-DBFF08F9867F}
+		{9A37B96B-0697-4B66-AA88-17E7122A4234} = {4E7267B8-E7DE-449F-B7A8-DBFF08F9867F}
+		{6439DA6A-46FB-43E6-9F62-57DF84CDB3C9} = {4E7267B8-E7DE-449F-B7A8-DBFF08F9867F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {718C2F7D-038A-4E4B-BE1F-338BD14C43A1}

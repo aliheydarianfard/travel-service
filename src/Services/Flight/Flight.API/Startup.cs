@@ -1,7 +1,4 @@
-﻿
-
-
-namespace travel.Services.Flight.Flight.API
+﻿namespace travel.Services.Flight.Flight.API
 {
     public class Startup
     {
@@ -15,7 +12,8 @@ namespace travel.Services.Flight.Flight.API
         {
             services.AddCustomMVC(Configuration)
                 .AddSwagger(Configuration)
-                .AddCustomDbContext(Configuration);
+                .AddCustomDbContext(Configuration)
+                .AddCustomOptions(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -92,6 +90,36 @@ namespace travel.Services.Flight.Flight.API
                                             });
                 });
 
+
+
+            return services;
+        }
+        public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.ClientErrorMapping[404].Title = " Not Found Resouce Or Api ";
+                options.ClientErrorMapping[403].Title = "Forbidden";
+                options.InvalidModelStateResponseFactory = context =>
+                {
+                    var values = context.ModelState.Values.Where(state => state.Errors.Count != 0)
+                   .Select(state => new { ErrorMessage = state.Errors.Select(p => p.ErrorMessage) });
+    
+                    string ErrorDetials = JsonConvert.SerializeObject(values) ?? "Please refer to the errors property for additional details.";
+
+                    var problemDetails = new ValidationProblemDetails(context.ModelState)
+                    {
+                        Instance = context.HttpContext.Request.Path,
+                        Status = StatusCodes.Status400BadRequest,
+                        Detail = ErrorDetials// "Please refer to the errors property for additional details."
+                    };
+
+                    return new BadRequestObjectResult(problemDetails)
+                    {
+                        ContentTypes = { "application/problem+json", "application/problem+xml" }
+                    };
+                };
+            });
 
 
             return services;

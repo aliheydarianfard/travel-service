@@ -4,27 +4,19 @@
 
 var configuration = GetConfiguration();
 
+
 try
 {
     var host = CreateHostBuilder(configuration, args);
     Log.Information("Configuring web host ({ApplicationContext})...", Program.AppName);
     Log.Information("Applying migrations ({ApplicationContext})...", Program.AppName);
-    using (var scope = host.Services.CreateScope())
+    host.MigrateDataBase<Program>((services) =>
     {
-        var context = scope.ServiceProvider.GetService<FlightContext>();
-        var env = scope.ServiceProvider.GetService<IWebHostEnvironment>();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<FlightContextSeed>>();
-        var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromSeconds(1), 5);
-        var retry = Policy.Handle<Exception>().WaitAndRetry(delay);
-                         
-        retry.Execute(() =>
-        {
-            new FlightContextSeed().MagirateAndSeedAsync(context, env, logger).Wait();
-        });
-
-
-    }
-
+        var context = services.GetService<FlightContext>();
+        var env = services.GetService<IWebHostEnvironment>();
+        var logger = services.GetRequiredService<ILogger<FlightContextSeed>>();
+        new FlightContextSeed().MagirateAndSeedAsync(context, env, logger).Wait();
+    });
 
     Log.Information("Starting web host ({ApplicationContext})...", Program.AppName);
     host.Run();

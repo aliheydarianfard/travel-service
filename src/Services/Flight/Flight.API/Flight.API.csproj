@@ -12,6 +12,7 @@
 
   <ItemGroup>
 	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 	  <PackageReference Include="Polly.Contrib.WaitAndRetry" Version="1.1.1" />
 	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
 	  <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
@@ -28,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\BuildingBlocks\Common.Logging\Common.Logging.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Host\Common.Host\Common.Host.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Logging\Common.Logging\Common.Logging.csproj" />
   </ItemGroup>
 
 </Project>

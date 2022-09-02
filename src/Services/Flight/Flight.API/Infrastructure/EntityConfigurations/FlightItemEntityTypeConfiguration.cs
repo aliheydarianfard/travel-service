@@ -25,11 +25,14 @@ class FlightItemEntityTypeConfiguration
             .HasMaxLength(150);
 
 
+        ///todo:refactor builder mode
         builder
-        .Property<decimal>("_price")
-        .UsePropertyAccessMode(PropertyAccessMode.Field)
-        .HasColumnName("Price")
-         .IsRequired(true);
+               .Property(p => p.Price).HasField("_price")
+               .UsePropertyAccessMode(PropertyAccessMode.Field)
+               .HasColumnName("Price")
+               .IsRequired(true);
+
+      
 
 
         builder

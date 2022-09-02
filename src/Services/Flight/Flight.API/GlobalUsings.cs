@@ -7,9 +7,15 @@ global using Serilog;
 global using System.IO.Compression;
 global using System.Reflection;
 global using travel.Services.Flight.Flight.API;
-global using travel.Services.FlightAPI.Domain.Entity;
 global using travel.Services.FlightAPI.Infrastructure;
 global using travel.Services.FlightAPI.Infrastructure.EntityConfigurations;
-global using travel.src.BuildingBlocks.Logging.Common.Host;
-global using travel.src.BuildingBlocks.Logging.Common.Logging;
+global using travel.BuildingBlocks.Logging.Common.Host;
+global using travel.BuildingBlocks.Logging.Common.Logging;
 global using Newtonsoft.Json;
+global using MediatR;
+global using travel.Services.FlightAPI.Domain.SeedWork;
+global using travel.Services.FlightAPI.Domain.AggregatesModel;
+global using travel.Services.FlightAPI.Domain.Exceptions;
+
+
+

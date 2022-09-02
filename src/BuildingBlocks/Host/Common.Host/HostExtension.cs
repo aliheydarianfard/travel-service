@@ -6,7 +6,7 @@ using Polly;
 using Polly.Contrib.WaitAndRetry;
 using System;
 
-namespace travel.src.BuildingBlocks.Logging.Common.Host;
+namespace travel.BuildingBlocks.Logging.Common.Host;
 
     public static class HostExtension
     {

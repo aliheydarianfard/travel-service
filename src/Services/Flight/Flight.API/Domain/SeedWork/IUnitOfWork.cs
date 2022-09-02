@@ -1,4 +1,4 @@
-﻿namespace travel.src.Services.Flight.Domain.SeedWork;
+﻿namespace travel.Services.Flight.Domain.SeedWork;
 
 public interface IUnitOfWork : IDisposable
 {

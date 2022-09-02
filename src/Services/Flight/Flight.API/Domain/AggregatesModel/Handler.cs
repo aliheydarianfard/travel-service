@@ -1,10 +1,18 @@
 ﻿
-namespace travel.Services.FlightAPI.Domain.Entity;
+namespace travel.Services.FlightAPI.Domain.AggregatesModel;
 
-    public class Handler
+public class Handler : BaseEntity, IAggregateRoot
+{
+    private string _name;
+    private string? _desc;
+
+    public Handler(string name, string? desc)
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string? Desc { get; set; }
+        _name = name;
+        _desc = desc;
     }
+
+    public string Name => _name;
+    public string? Desc => _desc;
+}
 

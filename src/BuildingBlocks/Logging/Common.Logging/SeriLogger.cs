@@ -1,4 +1,4 @@
-﻿namespace travel.src.BuildingBlocks.Logging.Common.Logging;
+﻿namespace travel.BuildingBlocks.Logging.Common.Logging;
 public static class SeriLogger
 {
     public static Action<HostBuilderContext, LoggerConfiguration> Configure =>

@@ -17,23 +17,24 @@ public class FlightContextSeed
             await context.SaveChangesAsync();
         }
 
-        //if (!context.flightItems.Any())
-        //{
-        //    await context.flightItems.AddRangeAsync(SeedFlightItems());
+        if (!context.flightItems.Any())
+        {
+            await context.flightItems.AddRangeAsync(SeedFlightItems());
 
-        //    await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
-        //}
+        }
     }
 
     private IEnumerable<Handler> SeedHandler()
     {
         return new List<Handler>()
         {
-            new Handler() { Name = "Mahan"},
-            new Handler() { Name = "Parto" },
-            new Handler() { Name = "Homares" },
-            new Handler() { Name = "Kish Air" }
+            new Handler( "Mahan","the best iranian handler"),
+            new Handler("Parto", "the cheapest iranian handler"),
+            new Handler("Homares", ""),
+            new Handler("Kish Air", ""),
+
         };
     }
 
@@ -41,8 +42,8 @@ public class FlightContextSeed
     {
         return new List<FlightItem>()
         {
-   new FlightItem(){FlightNumber="AB-123",HandlerId=0,Price=12000,Markup=0,Discount=100 },
-   new FlightItem(){FlightNumber="GH-653",HandlerId=1,Price=32000,Markup=0,Discount=200 },
+   new FlightItem(flightNumber: "A12-THR-MHD-MAHAN",price:55M,markup: 0M,discount: 10M,remain: 35,handlerId:0,stockThreshold: 3),
+   new FlightItem(flightNumber: "C132-KIH-THR-PARTO",price:35M,markup: 10M,discount: 0M,remain: 55,handlerId:1,stockThreshold: 5),
         };
     }
 

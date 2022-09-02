@@ -32,7 +32,17 @@ class FlightItemEntityTypeConfiguration
                .HasColumnName("Price")
                .IsRequired(true);
 
-      
+        builder
+               .Property(p => p.Source).HasField("_source")
+               .UsePropertyAccessMode(PropertyAccessMode.Field)
+               .HasColumnName("Source")
+               .IsRequired(true);
+
+        builder
+             .Property(p => p.Destination).HasField("_destination")
+             .UsePropertyAccessMode(PropertyAccessMode.Field)
+             .HasColumnName("Destination")
+             .IsRequired(true);
 
 
         builder
@@ -52,9 +62,9 @@ class FlightItemEntityTypeConfiguration
 
 
         builder
-   .Property<int>("_handlerId")
+   .Property<int>("_flightTypeId")
    .UsePropertyAccessMode(PropertyAccessMode.Field)
-   .HasColumnName("HandlerId")
+   .HasColumnName("FlightTypeId")
     .IsRequired(true);
 
         builder
@@ -64,14 +74,14 @@ class FlightItemEntityTypeConfiguration
     .IsRequired(true);
 
         builder
-         .Property<int>("_stockThreshold")
+         .Property<int>("_minimumquantity")
          .UsePropertyAccessMode(PropertyAccessMode.Field)
-         .HasColumnName("StockThreshold")
+         .HasColumnName("Minimumquantity")
           .IsRequired(true);
 
 
-        builder.HasOne(ci => ci.Handler)
+        builder.HasOne(ci => ci.flightType)
             .WithMany()
-            .HasForeignKey("_handlerId");
+            .HasForeignKey("_flightTypeId");
     }
 }

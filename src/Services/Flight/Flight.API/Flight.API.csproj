@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Application\" />
+    <Folder Include="Domain\AggregatesModel\HandlreAggregate\" />
   </ItemGroup>
 
   <ItemGroup>

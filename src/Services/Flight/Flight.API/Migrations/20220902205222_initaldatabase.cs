@@ -16,11 +16,11 @@ namespace Flight.API.Migrations
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
-                name: "handler_hilo",
+                name: "flightType_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
-                name: "Handler",
+                name: "FlightType",
                 schema: "Flight",
                 columns: table => new
                 {
@@ -30,7 +30,7 @@ namespace Flight.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Handler", x => x.Id);
+                    table.PrimaryKey("PK_FlightType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -39,31 +39,33 @@ namespace Flight.API.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    HandlerId = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Destination = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FlightTypeId = table.Column<int>(type: "int", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FlightNumber = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Markup = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Remain = table.Column<int>(type: "int", nullable: false),
-                    StockThreshold = table.Column<int>(type: "int", nullable: false)
+                    Minimumquantity = table.Column<int>(type: "int", nullable: false),
+                    Remain = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FlightItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FlightItem_Handler_HandlerId",
-                        column: x => x.HandlerId,
+                        name: "FK_FlightItem_FlightType_FlightTypeId",
+                        column: x => x.FlightTypeId,
                         principalSchema: "Flight",
-                        principalTable: "Handler",
+                        principalTable: "FlightType",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FlightItem_HandlerId",
+                name: "IX_FlightItem_FlightTypeId",
                 schema: "Flight",
                 table: "FlightItem",
-                column: "HandlerId");
+                column: "FlightTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -73,14 +75,14 @@ namespace Flight.API.Migrations
                 schema: "Flight");
 
             migrationBuilder.DropTable(
-                name: "Handler",
+                name: "FlightType",
                 schema: "Flight");
 
             migrationBuilder.DropSequence(
                 name: "flight_hilo");
 
             migrationBuilder.DropSequence(
-                name: "handler_hilo");
+                name: "flightType_hilo");
         }
     }
 }

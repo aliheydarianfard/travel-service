@@ -14,7 +14,7 @@ global using travel.BuildingBlocks.Logging.Common.Logging;
 global using Newtonsoft.Json;
 global using MediatR;
 global using travel.Services.FlightAPI.Domain.SeedWork;
-global using travel.Services.FlightAPI.Domain.AggregatesModel;
+global using travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate;
 global using travel.Services.FlightAPI.Domain.Exceptions;
 
 

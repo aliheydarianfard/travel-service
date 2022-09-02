@@ -4,15 +4,15 @@
 namespace travel.Services.FlightAPI.Infrastructure.EntityConfigurations;
 
 
-class HandlerEntityTypeConfiguration
-    : IEntityTypeConfiguration<Handler>
+class FlightTypeEntityTypeConfiguration
+    : IEntityTypeConfiguration<FlightType>
 {
-    public void Configure(EntityTypeBuilder<Handler> builder)
+    public void Configure(EntityTypeBuilder<FlightType> builder)
     {
-        builder.ToTable("Handler", schema: "Flight");
+        builder.ToTable("FlightType", schema: "Flight");
         builder.HasKey(ci => ci.Id);
         builder.Property(ci => ci.Id)
-            .UseHiLo("handler_hilo")
+            .UseHiLo("flightType_hilo")
             .IsRequired();
 
       

@@ -11,7 +11,7 @@ using travel.Services.FlightAPI.Infrastructure;
 namespace Flight.API.Migrations
 {
     [DbContext(typeof(FlightContext))]
-    [Migration("20220902174308_initaldatabase")]
+    [Migration("20220902205222_initaldatabase")]
     partial class initaldatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +26,7 @@ namespace Flight.API.Migrations
             modelBuilder.HasSequence("flight_hilo")
                 .IncrementsBy(10);
 
-            modelBuilder.HasSequence("handler_hilo")
+            modelBuilder.HasSequence("flightType_hilo")
                 .IncrementsBy(10);
 
             modelBuilder.Entity("travel.Services.FlightAPI.Domain.AggregatesModel.FlightItem", b =>
@@ -36,6 +36,20 @@ namespace Flight.API.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "flight_hilo");
+
+                    b.Property<string>("Destination")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Destination");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Price");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Source");
 
                     b.Property<decimal>("_discount")
                         .HasColumnType("decimal(18,2)")
@@ -47,40 +61,36 @@ namespace Flight.API.Migrations
                         .HasColumnType("nvarchar(150)")
                         .HasColumnName("FlightNumber");
 
-                    b.Property<int>("_handlerId")
+                    b.Property<int>("_flightTypeId")
                         .HasColumnType("int")
-                        .HasColumnName("HandlerId");
+                        .HasColumnName("FlightTypeId");
 
                     b.Property<decimal>("_markup")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Markup");
 
-                    b.Property<decimal>("_price")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("Price");
+                    b.Property<int>("_minimumquantity")
+                        .HasColumnType("int")
+                        .HasColumnName("Minimumquantity");
 
                     b.Property<int>("_remain")
                         .HasColumnType("int")
                         .HasColumnName("Remain");
 
-                    b.Property<int>("_stockThreshold")
-                        .HasColumnType("int")
-                        .HasColumnName("StockThreshold");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("_handlerId");
+                    b.HasIndex("_flightTypeId");
 
                     b.ToTable("FlightItem", "Flight");
                 });
 
-            modelBuilder.Entity("travel.Services.FlightAPI.Domain.AggregatesModel.Handler", b =>
+            modelBuilder.Entity("travel.Services.FlightAPI.Domain.AggregatesModel.FlightType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "handler_hilo");
+                    SqlServerPropertyBuilderExtensions.UseHiLo(b.Property<int>("Id"), "flightType_hilo");
 
                     b.Property<string>("_desc")
                         .HasMaxLength(500)
@@ -95,18 +105,18 @@ namespace Flight.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Handler", "Flight");
+                    b.ToTable("FlightType", "Flight");
                 });
 
             modelBuilder.Entity("travel.Services.FlightAPI.Domain.AggregatesModel.FlightItem", b =>
                 {
-                    b.HasOne("travel.Services.FlightAPI.Domain.AggregatesModel.Handler", "Handler")
+                    b.HasOne("travel.Services.FlightAPI.Domain.AggregatesModel.FlightType", "flightType")
                         .WithMany()
-                        .HasForeignKey("_handlerId")
+                        .HasForeignKey("_flightTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Handler");
+                    b.Navigation("flightType");
                 });
 #pragma warning restore 612, 618
         }

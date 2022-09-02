@@ -1,4 +1,4 @@
-﻿namespace travel.Services.FlightAPI.Domain.AggregatesModel;
+﻿namespace travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate;
 public class FlightItem : BaseEntity, IAggregateRoot
 {
     private string _flightNumber;
@@ -6,18 +6,23 @@ public class FlightItem : BaseEntity, IAggregateRoot
     private decimal _markup;
     private decimal _discount;
     private int _remain;
-    private int _stockThreshold;
-    private int _handlerId;
+    private int _minimumquantity;
+    private int _flightTypeId;
+    private string _source;
+    private string _destination;
 
-    public FlightItem(string flightNumber, decimal price, decimal markup, decimal discount, int remain, int stockThreshold, int handlerId)
+    public FlightItem(string flightNumber, decimal price, decimal markup, decimal discount, int remain, int minimumquantity, int flightTypeId, string source,string destination)
     {
         _flightNumber = flightNumber ?? throw new FlightItemDomainException("The flight number is empty and must be entered");
         _price = price <= 0 ? throw new FlightItemDomainException("The price should be bigger than zero") : price;
         _markup = markup;
         _discount = discount;
         _remain = remain;
-        _handlerId = handlerId;
-        _stockThreshold = stockThreshold;
+        _flightTypeId = flightTypeId;
+        _minimumquantity = minimumquantity;
+        _source = source ?? throw new FlightItemDomainException("The source can not be empty");
+        _destination = destination ?? throw new FlightItemDomainException("The destination can not be empty");
+
     }
 
     public string FlightNumber => _flightNumber;
@@ -25,13 +30,16 @@ public class FlightItem : BaseEntity, IAggregateRoot
     public decimal Markup => _markup;
     public decimal Discount => _discount;
     public int Remain => _remain;
-    public int HandlerId => _handlerId;
-    public int StockThreshold => _stockThreshold;
-    public Handler Handler { get; set; }
+    public string Source => _source;
+    public string Destination => _destination;
+    public int FlightTypeId => _flightTypeId;
+    public int Minimumquantity => _minimumquantity;
+    public FlightType flightType { get; set; }
 
     public int AddFllightItem(int quantity)
     {
-        int orginal = this._remain;
+        if(_source==_destination)
+            throw new FlightItemDomainException($"Source and destination must be diffrent");
 
         if (quantity < _remain)
         {
@@ -55,7 +63,7 @@ public class FlightItem : BaseEntity, IAggregateRoot
 
         this._remain -= removed;
 
-        if (this._remain <= this._stockThreshold)
+        if (this._remain <= this._minimumquantity)
         {
 
             // Save Domain Event for publication at the time of storage
@@ -73,7 +81,15 @@ public class FlightItem : BaseEntity, IAggregateRoot
 
         this._discount = discount;
     }
-
+    public void UpdatePrice(int newPrice)
+    {
+        if (newPrice < 0)
+            throw new FlightItemDomainException("The price should be bigger than zero");
+        if (_price != newPrice)
+        {
+            //AddDomainEvent();
+        }
+    }
 
 }
 

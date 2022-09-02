@@ -6,7 +6,8 @@ public class FlightItem
     public decimal Price { get; set; }
     public decimal? Markup { get; set; }
     public decimal? Discount { get; set; }
-    public Handler Handler { get; set; }
+    public int Remain { get; set; }
     public int HandlerId { get; set; }
+    public Handler Handler { get; set; }
 }
 

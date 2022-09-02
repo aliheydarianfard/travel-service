@@ -23,6 +23,9 @@ public class FlightItemEntityTypeConfiguration : IEntityTypeConfiguration<Flight
         builder.Property(ci => ci.Markup)
      .IsRequired(false);
 
+        builder.Property(ci => ci.Remain)
+  .IsRequired(true);
+
         builder.Property(ci => ci.Discount)
      .IsRequired(false);
 

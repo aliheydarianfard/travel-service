@@ -42,8 +42,8 @@ public class FlightContextSeed
     {
         return new List<FlightItem>()
         {
-   new FlightItem(flightNumber: "A12-THR-MHD-MAHAN",price:55M,markup: 0M,discount: 10M,remain: 35,handlerId:0,stockThreshold: 3),
-   new FlightItem(flightNumber: "C132-KIH-THR-PARTO",price:35M,markup: 10M,discount: 0M,remain: 55,handlerId:1,stockThreshold: 5),
+   new FlightItem(flightNumber: "A12-THR-MHD-MAHAN",price:55M,markup: 0M,discount: 10M,remain: 35,handlerId:1,stockThreshold: 3),
+   new FlightItem(flightNumber: "C132-KIH-THR-PARTO",price:35M,markup: 10M,discount: 0M,remain: 55,handlerId:2,stockThreshold: 5),
         };
     }
 

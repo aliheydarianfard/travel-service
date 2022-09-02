@@ -11,7 +11,7 @@ using travel.Services.FlightAPI.Infrastructure;
 namespace Flight.API.Migrations
 {
     [DbContext(typeof(FlightContext))]
-    [Migration("20220902173731_initaldatabase")]
+    [Migration("20220902174308_initaldatabase")]
     partial class initaldatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

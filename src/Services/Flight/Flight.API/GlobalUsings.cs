@@ -11,3 +11,6 @@ global using travel.Services.FlightAPI.Infrastructure;
 global using  System.IO.Compression;
 global using  Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using travel.Services.FlightAPI.Infrastructure.EntityConfigurations;
+global using Polly;
+global using Polly.Contrib.WaitAndRetry;
+global using System.Data.SqlClient;

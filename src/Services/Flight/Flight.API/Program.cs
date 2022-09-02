@@ -1,6 +1,4 @@
 
-using Polly;
-using System.Data.SqlClient;
 
 var configuration = GetConfiguration();
 
@@ -14,15 +12,9 @@ try
         var context = scope.ServiceProvider.GetService<FlightContext>();
         var env = scope.ServiceProvider.GetService<IWebHostEnvironment>();
         var logger = scope.ServiceProvider.GetRequiredService<ILogger<FlightContextSeed>>();
-
-        var retry = Policy.Handle<SqlException>()
-                             .WaitAndRetry(new TimeSpan[]
-                             {
-                                TimeSpan.FromSeconds(3),
-                                TimeSpan.FromSeconds(5),
-                                TimeSpan.FromSeconds(8),
-                             });
-
+        var delay = Backoff.DecorrelatedJitterBackoffV2(medianFirstRetryDelay: TimeSpan.FromSeconds(1), 5);
+        var retry = Policy.Handle<Exception>().WaitAndRetry(delay);
+                         
         retry.Execute(() =>
         {
             new FlightContextSeed().MagirateAndSeedAsync(context, env, logger).Wait();

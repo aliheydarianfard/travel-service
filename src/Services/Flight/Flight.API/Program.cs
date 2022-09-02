@@ -1,4 +1,7 @@
 
+using Polly;
+using System.Data.SqlClient;
+
 var configuration = GetConfiguration();
 
 try
@@ -6,6 +9,27 @@ try
     var host = CreateHostBuilder(configuration, args);
     Log.Information("Configuring web host ({ApplicationContext})...", Program.AppName);
     Log.Information("Applying migrations ({ApplicationContext})...", Program.AppName);
+    using (var scope = host.Services.CreateScope())
+    {
+        var context = scope.ServiceProvider.GetService<FlightContext>();
+        var env = scope.ServiceProvider.GetService<IWebHostEnvironment>();
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<FlightContextSeed>>();
+
+        var retry = Policy.Handle<SqlException>()
+                             .WaitAndRetry(new TimeSpan[]
+                             {
+                                TimeSpan.FromSeconds(3),
+                                TimeSpan.FromSeconds(5),
+                                TimeSpan.FromSeconds(8),
+                             });
+
+        retry.Execute(() =>
+        {
+            new FlightContextSeed().MagirateAndSeedAsync(context, env, logger).Wait();
+        });
+
+
+    }
 
 
     Log.Information("Starting web host ({ApplicationContext})...", Program.AppName);

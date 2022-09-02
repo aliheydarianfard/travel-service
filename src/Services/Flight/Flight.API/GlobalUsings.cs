@@ -1,5 +1,13 @@
 ﻿global using travel.Services.Flight.Flight.API;
 global using Microsoft.OpenApi.Models;
-global using  Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc;
 global using Serilog;
 global using travel.BuildingBlocks.Logging.Common.Logging;
+global using Microsoft.EntityFrameworkCore;
+global using System.Reflection;
+global using Microsoft.EntityFrameworkCore.Design;
+global using travel.Services.FlightAPI.Domain.Entity;
+global using travel.Services.FlightAPI.Infrastructure;
+global using  System.IO.Compression;
+global using  Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using travel.Services.FlightAPI.Infrastructure.EntityConfigurations;

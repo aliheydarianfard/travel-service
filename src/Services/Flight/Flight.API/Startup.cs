@@ -1,4 +1,6 @@
 ﻿
+
+
 namespace travel.Services.Flight.Flight.API
 {
     public class Startup
@@ -12,7 +14,8 @@ namespace travel.Services.Flight.Flight.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCustomMVC(Configuration)
-                .AddSwagger(Configuration);
+                .AddSwagger(Configuration)
+                .AddCustomDbContext(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -28,7 +31,7 @@ namespace travel.Services.Flight.Flight.API
             app.UseSwagger()
              .UseSwaggerUI(c =>
                 {
-                 c.SwaggerEndpoint($"{ (!string.IsNullOrEmpty(pathBase) ? pathBase : string.Empty) }/swagger/v1/swagger.json", "Catalog.API V1");
+                    c.SwaggerEndpoint($"{ (!string.IsNullOrEmpty(pathBase) ? pathBase : string.Empty) }/swagger/v1/swagger.json", "Catalog.API V1");
                 });
 
 
@@ -76,6 +79,24 @@ namespace travel.Services.Flight.Flight.API
             return services;
 
         }
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddEntityFrameworkSqlServer()
+                .AddDbContext<FlightContext>(options =>
+                {
+                    options.UseSqlServer(configuration["ConnectionString"],
+                                            sqlServerOptionsAction: sqlOptions =>
+                                            {
+                                                sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
+                                                sqlOptions.EnableRetryOnFailure(maxRetryCount: 15, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
+                                            });
+                });
+
+
+
+            return services;
+        }
+
     }
 
 

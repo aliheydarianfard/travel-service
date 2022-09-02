@@ -13,6 +13,7 @@ services:
   flight-api:
    environment:
     - ASPNETCORE_ENVIRONMENT=Development
+    - ConnectionString=${TRAVEL_FLIGHT_DB:-Server=sqldata;Database=Services.FlightDb;User Id=sa;Password=Pass@word}
     - PATH_BASE=${PATH_BASE}
     - SeqServerUrl=${SeqServerUrlVar}
     - LogstashgUrl=${LogstashUrlVar}

@@ -64,7 +64,7 @@ class FlightItemEntityTypeConfiguration
         builder
    .Property<int>("_flightTypeId")
    .UsePropertyAccessMode(PropertyAccessMode.Field)
-   .HasColumnName("FlightTypeId")
+   .HasColumnName("HandlerId")
     .IsRequired(true);
 
         builder
@@ -80,8 +80,8 @@ class FlightItemEntityTypeConfiguration
           .IsRequired(true);
 
 
-        builder.HasOne(ci => ci.flightType)
+        builder.HasOne(ci => ci.handler)
             .WithMany()
-            .HasForeignKey("_flightTypeId");
+            .HasForeignKey("_handlerId");
     }
 }

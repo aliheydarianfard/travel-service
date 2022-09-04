@@ -1,12 +1,12 @@
 ﻿
 namespace travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate;
 
-public class FlightType : BaseEntity, IAggregateRoot
+public class Handler : BaseEntity
 {
     private string _name;
     private string? _desc;
 
-    public FlightType(string name, string? desc)
+    public Handler(string name, string? desc)
     {
         _name = name;
         _desc = desc;

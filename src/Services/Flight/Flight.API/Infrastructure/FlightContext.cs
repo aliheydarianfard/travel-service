@@ -6,13 +6,15 @@ public class FlightContext : DbContext
     {
     }
     public DbSet<FlightItem> flightItems { get; set; }
-   
-    public DbSet<FlightType> flightTypes { get; set; }
+    public DbSet<Handler> handlers { get; set; }
+    public DbSet<Agency> agencies { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfiguration(new FlightItemEntityTypeConfiguration());
-        builder.ApplyConfiguration(new FlightTypeEntityTypeConfiguration());
+        builder.ApplyConfiguration(new HandlerEntityTypeConfiguration());
+        builder.ApplyConfiguration(new AgencyEntityTypeConfiguration());
+        builder.ApplyConfiguration(new AgencyItemEntityTypeConfiguration());
     }
 }
 

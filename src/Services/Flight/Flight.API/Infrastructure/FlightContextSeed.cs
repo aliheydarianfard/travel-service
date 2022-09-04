@@ -10,9 +10,9 @@ public class FlightContextSeed
         var contentRootPath = env.ContentRootPath;
         var picturePath = env.WebRootPath;
 
-        if (!context.flightTypes.Any())
+        if (!context.handlers.Any())
         {
-            await context.flightTypes.AddRangeAsync(SeddFlightType());
+            await context.handlers.AddRangeAsync(SeddHandler());
 
             await context.SaveChangesAsync();
         }
@@ -24,14 +24,24 @@ public class FlightContextSeed
             await context.SaveChangesAsync();
 
         }
+
+        if (!context.agencies.Any())
+        {
+            await context.agencies.AddRangeAsync(SeedAgency());
+
+            await context.SaveChangesAsync();
+
+        }
     }
 
-    private IEnumerable<FlightType> SeddFlightType()
+    private IEnumerable<Handler> SeddHandler()
     {
-        return new List<FlightType>()
+        return new List<Handler>()
         {
-            new FlightType( "Charter",""),
-            new FlightType("System","the cheapest price flight"),
+            new Handler( "kish air",null),
+            new Handler("mahan",null),
+            new Handler("homares",null),
+            new Handler("kaspian","the cheapest price flight"),
       
 
         };
@@ -41,8 +51,20 @@ public class FlightContextSeed
     {
         return new List<FlightItem>()
         {
-             new FlightItem(flightNumber: "A129-THR-MHD-MAHAN",price:55M,markup: 0M,discount: 10M,remain: 35,flightTypeId:1,minimumquantity: 3,source:"THR",destination:"MHD"),
-             new FlightItem(flightNumber: "C753-KIH-THR-PARTO",price:35M,markup: 10M,discount: 0M,remain: 55,flightTypeId:2,minimumquantity: 5,source:"KIHD",destination:"THR"),
+             new FlightItem(flightNumber: "A129-THR-MHD-MAHAN",price:55M,markup: 0M,discount: 10M,remain: 35,handlerId:1,minimumquantity: 3,source:"THR",destination:"MHD"),
+             new FlightItem(flightNumber: "C753-KIH-THR-PARTO",price:35M,markup: 10M,discount: 0M,remain: 55,handlerId:2,minimumquantity: 5,source:"KIHD",destination:"THR"),
+        };
+    }
+    private IEnumerable<Agency> SeedAgency()
+    {
+        return new List<Agency>()
+        {
+         new Agency("Vip Agancy",2),
+         new Agency("Vip Agancy",3),
+         new Agency("charte724 Agancy",1),
+
+
+
         };
     }
 

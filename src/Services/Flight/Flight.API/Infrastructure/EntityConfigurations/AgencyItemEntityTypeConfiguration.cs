@@ -37,7 +37,7 @@ public class AgencyItemEntityTypeConfiguration : IEntityTypeConfiguration<Agency
 
         builder.HasOne<Handler>()
           .WithMany()
-          .HasForeignKey("_handlerId");
+          .HasForeignKey("HandlerId");
 
         builder.HasOne<Agency>()
          .WithMany(p => p.AgencyItems)

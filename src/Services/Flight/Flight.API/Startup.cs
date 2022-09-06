@@ -14,6 +14,9 @@
                 .AddSwagger(Configuration)
                 .AddCustomDbContext(Configuration)
                 .AddCustomOptions(Configuration);
+            services.AddScoped<IFlightRepository, FlightRepository>();  
+            services.AddScoped<IAgencyRepository,AgencyRepository>();  
+            services.AddMediatR(typeof(Startup).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

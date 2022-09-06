@@ -81,7 +81,7 @@ public class FlightItem : BaseEntity, IAggregateRoot
 
         this._discount = discount;
     }
-    public void UpdatePrice(int newPrice)
+    public void UpdatePrice(decimal newPrice)
     {
         if (newPrice < 0)
             throw new FlightItemDomainException("The price should be bigger than zero");

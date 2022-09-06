@@ -82,6 +82,6 @@ class FlightItemEntityTypeConfiguration
 
         builder.HasOne(ci => ci.handler)
             .WithMany()
-            .HasForeignKey("_handlerId");
+            .HasForeignKey("HandlerId");
     }
 }

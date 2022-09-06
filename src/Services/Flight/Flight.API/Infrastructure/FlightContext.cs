@@ -1,6 +1,6 @@
 ﻿namespace travel.Services.FlightAPI.Infrastructure;
 
-public class FlightContext : DbContext
+public class FlightContext : DbContext,IUnitOfWork
 {
     public FlightContext(DbContextOptions<FlightContext> options) : base(options)
     {
@@ -8,6 +8,12 @@ public class FlightContext : DbContext
     public DbSet<FlightItem> flightItems { get; set; }
     public DbSet<Handler> handlers { get; set; }
     public DbSet<Agency> agencies { get; set; }
+
+    public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+    {
+        int k = await this.SaveChangesAsync();
+        return true;
+    }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

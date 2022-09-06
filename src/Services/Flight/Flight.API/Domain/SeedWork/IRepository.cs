@@ -1,4 +1,4 @@
-﻿namespace travel.Services.Flight.Domain.SeedWork;
+﻿namespace travel.Services.FlightAPI.Domain.SeedWork;
 
 
 public interface IRepository<T>  

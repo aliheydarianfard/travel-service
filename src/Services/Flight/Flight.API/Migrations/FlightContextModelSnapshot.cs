@@ -50,12 +50,9 @@ namespace Flight.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("HandlerId");
 
-                    b.Property<int>("_handlerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("_handlerId");
+                    b.HasIndex("HandlerId");
 
                     b.ToTable("Agency", "Agency");
                 });
@@ -76,18 +73,18 @@ namespace Flight.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("handlerItemId");
 
+                    b.Property<int>("HandlerId")
+                        .HasColumnType("int");
+
                     b.Property<int>("RequestedNumber")
                         .HasColumnType("int")
                         .HasColumnName("RequestedNumber");
-
-                    b.Property<int>("_handlerId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AgencyId");
 
-                    b.HasIndex("_handlerId");
+                    b.HasIndex("HandlerId");
 
                     b.ToTable("AgencyItems", "Agency");
                 });
@@ -104,6 +101,10 @@ namespace Flight.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Destination");
+
+                    b.Property<int>("HandlerId")
+                        .HasColumnType("int")
+                        .HasColumnName("HandlerId1");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)")
@@ -128,9 +129,6 @@ namespace Flight.API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("HandlerId");
 
-                    b.Property<int>("_handlerId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("_markup")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Markup");
@@ -145,7 +143,7 @@ namespace Flight.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("_handlerId");
+                    b.HasIndex("HandlerId");
 
                     b.ToTable("FlightItem", "Flight");
                 });
@@ -178,7 +176,7 @@ namespace Flight.API.Migrations
                 {
                     b.HasOne("travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate.Handler", null)
                         .WithMany()
-                        .HasForeignKey("_handlerId")
+                        .HasForeignKey("HandlerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
@@ -193,7 +191,7 @@ namespace Flight.API.Migrations
 
                     b.HasOne("travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate.Handler", null)
                         .WithMany()
-                        .HasForeignKey("_handlerId")
+                        .HasForeignKey("HandlerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -202,7 +200,7 @@ namespace Flight.API.Migrations
                 {
                     b.HasOne("travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate.Handler", "handler")
                         .WithMany()
-                        .HasForeignKey("_handlerId")
+                        .HasForeignKey("HandlerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -36,7 +36,7 @@ public class AgencyEntityTypeConfiguration
 
         builder.HasOne<Handler>()
             .WithMany()
-            .HasForeignKey("_handlerId").OnDelete(DeleteBehavior.NoAction);
+            .HasForeignKey("HandlerId").OnDelete(DeleteBehavior.NoAction);
 
     }
 }

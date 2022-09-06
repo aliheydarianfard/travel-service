@@ -17,5 +17,5 @@ global using travel.Services.FlightAPI.Domain.SeedWork;
 global using travel.Services.FlightAPI.Domain.AggregatesModel.FlightAggregate;
 global using travel.Services.FlightAPI.Domain.Exceptions;
 global using travel.Services.FlightAPI.Domain.AggregatesModel.AgencyAggregate;
-
+global using travel.Services.FlightAPI.Infrastructure.Repositories;
 

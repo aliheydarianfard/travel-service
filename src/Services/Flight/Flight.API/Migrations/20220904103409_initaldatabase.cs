@@ -51,15 +51,14 @@ namespace Flight.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
                     AgencyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    HandlerId = table.Column<int>(type: "int", nullable: false),
-                    _handlerId = table.Column<int>(type: "int", nullable: false)
+                    HandlerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Agency", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Agency_Handler__handlerId",
-                        column: x => x._handlerId,
+                        name: "FK_Agency_Handler_HandlerId",
+                        column: x => x.HandlerId,
                         principalSchema: "Flight",
                         principalTable: "Handler",
                         principalColumn: "Id");
@@ -74,7 +73,7 @@ namespace Flight.API.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Source = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Destination = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    _handlerId = table.Column<int>(type: "int", nullable: false),
+                    HandlerId1 = table.Column<int>(type: "int", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     FlightNumber = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     HandlerId = table.Column<int>(type: "int", nullable: false),
@@ -86,8 +85,8 @@ namespace Flight.API.Migrations
                 {
                     table.PrimaryKey("PK_FlightItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FlightItem_Handler__handlerId",
-                        column: x => x._handlerId,
+                        name: "FK_FlightItem_Handler_HandlerId1",
+                        column: x => x.HandlerId1,
                         principalSchema: "Flight",
                         principalTable: "Handler",
                         principalColumn: "Id",
@@ -103,7 +102,7 @@ namespace Flight.API.Migrations
                     AgencyId = table.Column<int>(type: "int", nullable: false),
                     RequestedNumber = table.Column<int>(type: "int", nullable: false),
                     handlerItemId = table.Column<int>(type: "int", nullable: false),
-                    _handlerId = table.Column<int>(type: "int", nullable: false)
+                    HandlerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,8 +115,8 @@ namespace Flight.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AgencyItems_Handler__handlerId",
-                        column: x => x._handlerId,
+                        name: "FK_AgencyItems_Handler_HandlerId",
+                        column: x => x.HandlerId,
                         principalSchema: "Flight",
                         principalTable: "Handler",
                         principalColumn: "Id",
@@ -125,16 +124,10 @@ namespace Flight.API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Agency__handlerId",
+                name: "IX_Agency_HandlerId",
                 schema: "Agency",
                 table: "Agency",
-                column: "_handlerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AgencyItems__handlerId",
-                schema: "Agency",
-                table: "AgencyItems",
-                column: "_handlerId");
+                column: "HandlerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AgencyItems_AgencyId",
@@ -143,10 +136,16 @@ namespace Flight.API.Migrations
                 column: "AgencyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FlightItem__handlerId",
+                name: "IX_AgencyItems_HandlerId",
+                schema: "Agency",
+                table: "AgencyItems",
+                column: "HandlerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FlightItem_HandlerId1",
                 schema: "Flight",
                 table: "FlightItem",
-                column: "_handlerId");
+                column: "HandlerId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

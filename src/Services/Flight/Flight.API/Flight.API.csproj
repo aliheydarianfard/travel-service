@@ -33,4 +33,8 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\Logging\Common.Logging\Common.Logging.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\Features\Flight\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Flight.API.Application.DomainEventHandlers.FlightPriceChanged
+﻿namespace travel.Services.FlightAPI.Appliction.DomainEventHandlers.FlightPriceChanged
 {
     public class FlightPriceChangedEventHandler : INotificationHandler<FlightPriceChangedDomainEvent>
     {

@@ -11,7 +11,7 @@ public class FlightItem : BaseEntity, IAggregateRoot
     private string _source;
     private string _destination;
 
-    public FlightItem(string flightNumber, decimal price, decimal markup, decimal discount, int remain, int minimumquantity, int handlerId, string source,string destination)
+    public FlightItem(string flightNumber, decimal price, decimal markup, decimal discount, int remain, int minimumquantity, int handlerId, string source, string destination)
     {
         _flightNumber = flightNumber ?? throw new FlightItemDomainException("The flight number is empty and must be entered");
         _price = price <= 0 ? throw new FlightItemDomainException("The price should be bigger than zero") : price;
@@ -38,7 +38,7 @@ public class FlightItem : BaseEntity, IAggregateRoot
 
     public int AddFllightItem(int quantity)
     {
-        if(_source==_destination)
+        if (_source == _destination)
             throw new FlightItemDomainException($"Source and destination must be diffrent");
 
         if (quantity < _remain)
@@ -87,7 +87,7 @@ public class FlightItem : BaseEntity, IAggregateRoot
             throw new FlightItemDomainException("The price should be bigger than zero");
         if (_price != newPrice)
         {
-            //AddDomainEvent();
+            AddDomainEvent(new FlightPriceChangedDomainEvent(newPrice, _price, this));
         }
         _price = newPrice;
     }

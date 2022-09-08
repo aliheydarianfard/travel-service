@@ -13,8 +13,12 @@ public class FlightController : ControllerBase
         _mediator = mediator;
     }
 
+    [Route("items")]
     [HttpPost]
-    public async Task<IActionResult> CreateAsync(CreateFlightCommand command)
+    [ProducesResponseType((int)HttpStatusCode.Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesDefaultResponseType]
+    public async Task<IActionResult> CreateAsync([FromBody] CreateFlightCommand command)
     {
         int id = await _mediator.Send(command);
         return Ok(id); 

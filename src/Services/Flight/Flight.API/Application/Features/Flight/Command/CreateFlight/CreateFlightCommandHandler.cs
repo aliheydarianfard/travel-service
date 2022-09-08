@@ -2,10 +2,10 @@
 {
     internal class CreateFlightCommandHandler : IRequestHandler<CreateFlightCommand, int>
     {
-        private readonly FlightRepository _flightRepository;
+        private readonly IFlightRepository _flightRepository;
         private readonly ILogger<CreateFlightCommandHandler> _logger;
 
-        public CreateFlightCommandHandler(FlightRepository flightRepository, ILogger<CreateFlightCommandHandler> logger)
+        public CreateFlightCommandHandler(IFlightRepository flightRepository, ILogger<CreateFlightCommandHandler> logger)
         {
             _flightRepository = flightRepository ?? throw new ArgumentException(nameof(flightRepository));
             _logger = logger ?? throw new ArgumentException(nameof(logger)); ;

@@ -1,10 +1,7 @@
 ﻿namespace travel.Services.FlightAPI.Appliction.Features.Flight.Command.CreateFlight;
 public class CreateFlightCommand : IRequest<int>
 {
-    public CreateFlightCommand()
-    {
-    }
-
+   
     [JsonConstructor]
     public CreateFlightCommand(string flightNumber, decimal price, decimal markup, decimal discount, int remain, string source, string destination, int minimumquantity, int handlerId)
     {

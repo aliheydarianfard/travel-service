@@ -20,3 +20,6 @@ global using travel.Services.FlightAPI.Domain.AggregatesModel.AgencyAggregate;
 global using travel.Services.FlightAPI.Infrastructure.Repositories;
 global using travel.Services.FlightAPI.Domain.Events;
 global using travel.Services.FlightAPI.Appliction.Features.Flight.Command.CreateFlight;
+global using travel.Services.FlightAPI.Appliction.DomainEventHandlers.Exceptions;
+global using travel.Services.FlightAPI.Appliction.Features.Flight.Command.UpdatePrice;
+global using System.Net;

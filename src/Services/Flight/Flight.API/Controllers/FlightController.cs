@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿
 
 namespace travel.Services.FlightAPI.Controllers;
 
@@ -13,16 +13,23 @@ public class FlightController : ControllerBase
         _mediator = mediator;
     }
 
-    [Route("items")]
+    [Route("Create")]
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [ProducesDefaultResponseType]
     public async Task<IActionResult> CreateAsync([FromBody] CreateFlightCommand command)
     {
         int id = await _mediator.Send(command);
         return Ok(id); 
     }
+    [Route("ChangePrice")]
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.Created)]
+    public async Task<IActionResult> ChangePrice([FromBody] UpdatePriceCommand command)
+    {
+        await _mediator.Send(command);
+        return Ok();
+    }
+
 
 
 
